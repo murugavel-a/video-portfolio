@@ -23,9 +23,10 @@
       --text-secondary: #e8e8e8;
       --text-tertiary: #a1a1aa;
       --text-muted: #71717a;
-      
+
       --accent: #4f8ef7;
-      --accent-glow: rgba(79, 142, 247, 0.3); /* slightly stronger glow */
+      --accent-glow: rgba(79, 142, 247, 0.3);
+      /* slightly stronger glow */
       --border: #2a2a2a;
       --card-bg: #181818;
       --tag-bg: #1a2540;
@@ -71,6 +72,7 @@
         text-shadow: 0 0 4px rgba(79, 142, 247, 0.2);
         opacity: 0.8;
       }
+
       100% {
         text-shadow: 0 0 16px rgba(79, 142, 247, 0.8), 0 0 32px rgba(79, 142, 247, 0.4);
         opacity: 1;
@@ -83,6 +85,158 @@
       font-size: clamp(0.95rem, 1.8vw + 0.5rem, 1.1rem);
       font-family: 'Space Mono', monospace;
       font-weight: 400;
+    }
+
+    /* ── Quick Access Nav Container & Banner ── */
+    .quick-nav-wrapper {
+      margin-top: 28px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(26, 37, 64, 0.7) 0%, rgba(15, 15, 26, 0.9) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(79, 142, 247, 0.35);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(79, 142, 247, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-nav-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(79, 142, 247, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .quick-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .quick-nav-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.725rem, 0.9vw + 0.4rem, 0.825rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 0 10px rgba(79, 142, 247, 0.5);
+    }
+
+    .quick-nav-hint .pulse-dot {
+      width: 9px;
+      height: 9px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #3b82f6;
+      animation: pulse-dot-anim 1.8s infinite;
+      display: inline-block;
+    }
+
+    @keyframes pulse-dot-anim {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.8);
+      }
+
+      70% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 9px rgba(59, 130, 246, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+      }
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quick-nav-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.825rem, 1vw + 0.45rem, 0.95rem);
+      font-weight: 700;
+      color: #cbd5e1;
+      background: rgba(20, 27, 45, 0.85);
+      border: 1.5px solid rgba(79, 142, 247, 0.35);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .quick-nav-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .quick-nav-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .quick-nav-btn:hover,
+    .quick-nav-btn:focus-visible {
+      color: #ffffff;
+      background: rgba(30, 58, 110, 0.95);
+      border-color: #60a5fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45), 0 0 12px rgba(96, 165, 250, 0.3);
+      outline: none;
+    }
+
+    .quick-nav-btn:hover svg {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.8));
+    }
+
+    .quick-nav-btn:hover::after {
+      opacity: 1;
+    }
+
+    .quick-nav-btn.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+      border-color: #93c5fd;
+      box-shadow: 0 0 24px rgba(59, 130, 246, 0.7), 0 4px 16px rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .quick-nav-btn.active svg {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
     }
 
     /* ── Section Title ── */
@@ -151,7 +305,7 @@
       color: inherit;
       position: relative;
     }
-    
+
     .video-card .thumb-vertical {
       border-radius: 8px 8px 0 0;
     }
@@ -182,6 +336,24 @@
     }
 
     .thumb-vertical iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* 16:9 horizontal thumbnail for long form video cards */
+    .thumb-horizontal {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #141a2e;
+      overflow: hidden;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .thumb-horizontal iframe {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -295,11 +467,11 @@
       opacity: 0;
       animation: fade-in 1s ease forwards 0.5s;
     }
-    
+
     .desktop-indicator {
       display: none;
     }
-    
+
     .per-card-indicator {
       position: absolute;
       top: -36px;
@@ -316,11 +488,11 @@
       align-items: center;
       transition: transform 0.3s ease;
     }
-    
+
     .per-card-indicator:hover {
       transform: translateX(-50%) scale(1.1);
     }
-    
+
     .per-card-arrow {
       width: 32px;
       height: 32px;
@@ -329,16 +501,23 @@
       animation: float-down-small 1.6s ease-in-out infinite;
       transition: filter 0.3s ease;
     }
-    
+
     .per-card-indicator:hover .per-card-arrow {
       filter: drop-shadow(0 0 14px rgba(79, 142, 247, 0.7));
     }
-    
+
     @keyframes float-down-small {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(12px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(12px);
+      }
     }
-    
+
     .last-card {
       position: relative;
     }
@@ -366,6 +545,7 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       }
+
       .desktop-indicator:hover {
         transform: translateY(-50%) scale(1.1);
         background: rgba(26, 37, 64, 0.6);
@@ -375,7 +555,9 @@
     }
 
     @keyframes fade-in {
-      to { opacity: 1; }
+      to {
+        opacity: 1;
+      }
     }
 
     .scroll-indicator-text {
@@ -404,15 +586,18 @@
       animation: float-down 2s ease-in-out infinite;
       transition: filter 0.3s ease;
     }
-    
+
     .scroll-indicator-wrapper:hover .scroll-arrow {
       filter: drop-shadow(0 0 20px rgba(79, 142, 247, 1));
     }
 
     @keyframes float-down {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0);
       }
+
       50% {
         transform: translateY(18px);
       }
@@ -425,11 +610,40 @@
   <!-- ── HEADER ── -->
   <header class="portfolio-header">
     <h1>Murugavel<span>.</span></h1>
-    <p>video editor · motion graphics</p>
+    <p>video editor</p>
+    <div class="quick-nav-wrapper">
+      <div class="quick-nav-header">
+        <span class="quick-nav-hint">
+          <span class="pulse-dot"></span> Filter Works by Category
+        </span>
+      </div>
+      <nav class="quick-nav" aria-label="Quick Access Navigation">
+        <a href="#short-form" class="quick-nav-btn active">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+          </svg>
+          Short Form
+        </a>
+        <a href="#motion-graphics" class="quick-nav-btn">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+          </svg>
+          Motion Graphics
+        </a>
+        <a href="#long-form-video" class="quick-nav-btn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z" />
+          </svg>
+          Long Form Video
+        </a>
+      </nav>
+    </div>
   </header>
 
   <!-- ── SHORT FORM CONTENT ── -->
-  <section class="section">
+  <section class="section" id="short-form">
     <div class="section-label" style="display:block; margin-bottom:4px;">Short Form Content</div>
     <div class="section-title">Reels &amp; Shorts</div>
     <p class="section-subtitle">Vertical video edits — Instagram Reels, YouTube Shorts</p>
@@ -441,7 +655,7 @@
         <div class="video-card youtube-component" data-video-url="https://youtube.com/shorts/iI8PI-3sqy0">
           <div class="per-card-indicator scroll-to-motion">
             <svg class="per-card-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
             </svg>
           </div>
           <div class="thumb-vertical yt-container">
@@ -456,7 +670,7 @@
         <div class="video-card youtube-component" data-video-url="https://youtube.com/shorts/MO228x4Tb98">
           <div class="per-card-indicator scroll-to-motion">
             <svg class="per-card-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
             </svg>
           </div>
           <div class="thumb-vertical yt-container">
@@ -471,7 +685,7 @@
         <div class="video-card last-card youtube-component" data-video-url="https://youtube.com/shorts/XPq_B5mZ_Ic">
           <div class="per-card-indicator scroll-to-motion">
             <svg class="per-card-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
             </svg>
           </div>
           <div class="thumb-vertical yt-container">
@@ -480,11 +694,11 @@
             <div class="video-title">video-3</div>
             <span class="video-tag">reel</span>
           </div>
-          
+
           <div class="scroll-indicator-wrapper desktop-indicator scroll-to-motion">
             <span class="scroll-indicator-text">Scroll</span>
             <svg class="scroll-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
             </svg>
           </div>
         </div>
@@ -492,112 +706,146 @@
       </div>
     </div>
 
-  <!-- ── MOTION GRAPHICS ── -->
-  <section class="section" id="motion-graphics">
-    <div class="section-label" style="display:block; margin-bottom:4px;">Motion Graphics</div>
-    <div class="section-title">Animated Work</div>
-    <p class="section-subtitle">After Effects, motion design &amp; visual storytelling</p>
+    <!-- ── MOTION GRAPHICS ── -->
+    <section class="section" id="motion-graphics">
+      <div class="section-label" style="display:block; margin-bottom:4px;">Motion Graphics</div>
+      <div class="section-title">Animated Work</div>
+      <p class="section-subtitle">After Effects, motion design &amp; visual storytelling</p>
 
-    <div class="video-grid">
+      <div class="video-grid">
 
-      <!-- Motion Card 1 -->
-      <div class="video-card youtube-component" data-video-url="https://www.youtube.com/watch?v=TmuGtZTK8ag">
-        <div class="per-card-indicator scroll-to-motion">
-          <svg class="per-card-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-          </svg>
+        <!-- Motion Card 1 -->
+        <div class="video-card youtube-component" data-video-url="https://www.youtube.com/watch?v=TmuGtZTK8ag">
+          <div class="per-card-indicator scroll-to-motion">
+            <svg class="per-card-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+            </svg>
+          </div>
+          <div class="thumb-vertical yt-container">
+          </div>
+          <div class="video-info">
+            <div class="video-title">Video-1</div>
+            <span class="video-tag">motion graphics</span>
+          </div>
         </div>
-        <div class="thumb-vertical yt-container">
+
+        <!-- Motion Card 2 -->
+        <div class="video-card youtube-component" data-video-url="https://youtu.be/GnvJTro9KUk">
+          <div class="per-card-indicator scroll-to-motion">
+            <svg class="per-card-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+            </svg>
+          </div>
+          <div class="thumb-vertical yt-container">
+          </div>
+          <div class="video-info">
+            <div class="video-title">Video-2</div>
+            <span class="video-tag">motion graphics</span>
+          </div>
         </div>
-        <div class="video-info">
-          <div class="video-title">Video-1</div>
-          <span class="video-tag">motion graphics</span>
+
+      </div>
+    </section>
+
+    <!-- ── LONG FORM VIDEO ── -->
+    <section class="section" id="long-form-video">
+      <div class="section-label" style="display:block; margin-bottom:4px;">Long Form Video</div>
+      <div class="section-title">Long Form Content</div>
+      <p class="section-subtitle">Long-form video edits &amp; storytelling</p>
+
+      <div class="video-grid-wrapper" style="position: relative; width: 100%;">
+        <div class="video-card youtube-component" data-video-url="https://youtu.be/J-cnM1m3vHg"
+          style="max-width: 900px;">
+          <div class="thumb-horizontal yt-container">
+          </div>
+          <div class="video-info">
+            <div class="video-title">The Content Creation</div>
+            <span class="video-tag">long form</span>
+          </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- ── FOOTER ── -->
+    <footer class="portfolio-footer">
+      <span>murugavel · chennai, india</span>
+      <span>video editing · motion graphics · vibe coding</span>
+    </footer>
 
-  <!-- ── FOOTER ── -->
-  <footer class="portfolio-footer">
-    <span>murugavel · chennai, india</span>
-    <span>video editing · motion graphics · vibe coding</span>
-  </footer>
+    <!-- ── YOUTUBE COMPONENT SCRIPT ── -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const components = document.querySelectorAll('.youtube-component');
 
-  <!-- ── YOUTUBE COMPONENT SCRIPT ── -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const components = document.querySelectorAll('.youtube-component');
+        components.forEach(async (card) => {
+          const rawUrl = card.getAttribute('data-video-url');
+          const container = card.querySelector('.yt-container');
+          if (!rawUrl || !container) return;
 
-      components.forEach(async (card) => {
-        const rawUrl = card.getAttribute('data-video-url');
-        const container = card.querySelector('.yt-container');
-        if (!rawUrl || !container) return;
+          // 7. Validate all video URLs before rendering
+          const videoId = extractVideoId(rawUrl);
+          if (!videoId) {
+            console.error("Invalid YouTube URL:", rawUrl);
+            return;
+          }
 
-        // 7. Validate all video URLs before rendering
-        const videoId = extractVideoId(rawUrl);
-        if (!videoId) {
-          console.error("Invalid YouTube URL:", rawUrl);
-          return;
-        }
+          // 3. Convert Shorts URLs automatically
+          // 1. Verify iframe src format
+          // 2. Ensure URL does NOT use watch?v= etc.
+          const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
-        // 3. Convert Shorts URLs automatically
-        // 1. Verify iframe src format
-        // 2. Ensure URL does NOT use watch?v= etc.
-        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+          // 6. Add console logging
+          console.log("Video ID:", videoId);
+          console.log("Embed URL:", embedUrl);
 
-        // 6. Add console logging
-        console.log("Video ID:", videoId);
-        console.log("Embed URL:", embedUrl);
+          // 5. Check if the video owner has disabled embedding
+          try {
+            // Using noembed as a proxy to check embed status without CORS issues
+            const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
+            const data = await response.json();
 
-        // 5. Check if the video owner has disabled embedding
-        try {
-          // Using noembed as a proxy to check embed status without CORS issues
-          const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
-          const data = await response.json();
-
-          if (data.error) {
-            // Embedding disabled or video unavailable. Prevent broken iframe from rendering.
-            renderFallback(container, videoId);
-          } else {
-            // Valid to embed
+            if (data.error) {
+              // Embedding disabled or video unavailable. Prevent broken iframe from rendering.
+              renderFallback(container, videoId);
+            } else {
+              // Valid to embed
+              renderIframe(container, videoId, embedUrl);
+            }
+          } catch (error) {
+            // 8. If an embed check fails, automatically fall back to iframe rendering
             renderIframe(container, videoId, embedUrl);
           }
-        } catch (error) {
-          // 8. If an embed check fails, automatically fall back to iframe rendering
-          renderIframe(container, videoId, embedUrl);
+        });
+
+        function extractVideoId(url) {
+          const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|shorts\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+          const match = url.match(regExp);
+          return (match && match[2].length === 11) ? match[2] : null;
         }
-      });
 
-      function extractVideoId(url) {
-        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|shorts\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        const match = url.match(regExp);
-        return (match && match[2].length === 11) ? match[2] : null;
-      }
+        function renderIframe(container, videoId, embedUrl) {
+          const iframe = document.createElement('iframe');
+          iframe.src = `${embedUrl}?rel=0&modestbranding=1`;
+          // 4. Add proper iframe attributes
+          iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+          iframe.setAttribute("allowfullscreen", "true");
+          iframe.setAttribute("title", "YouTube Video");
 
-      function renderIframe(container, videoId, embedUrl) {
-        const iframe = document.createElement('iframe');
-        iframe.src = `${embedUrl}?rel=0&modestbranding=1`;
-        // 4. Add proper iframe attributes
-        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-        iframe.setAttribute("allowfullscreen", "true");
-        iframe.setAttribute("title", "YouTube Video");
+          // Setup fallback just in case it fails after loading
+          iframe.onerror = function () {
+            renderFallback(container, videoId);
+          };
 
-        // Setup fallback just in case it fails after loading
-        iframe.onerror = function () {
-          renderFallback(container, videoId);
-        };
+          container.innerHTML = '';
+          container.appendChild(iframe);
+        }
 
-        container.innerHTML = '';
-        container.appendChild(iframe);
-      }
+        function renderFallback(container, videoId) {
+          // Show the thumbnail instead, display a "Watch on YouTube" button
+          const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+          const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-      function renderFallback(container, videoId) {
-        // Show the thumbnail instead, display a "Watch on YouTube" button
-        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-        container.innerHTML = `
+          container.innerHTML = `
           <div class="thumb-placeholder" style="background-image: url('${thumbnailUrl}'); background-size: cover; background-position: center; width: 100%; height: 100%; position: absolute; inset: 0;">
             <a href="${watchUrl}" target="_blank" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background: rgba(0,0,0,0.4); transition: background 0.3s;">
               <div class="play-icon" style="width: 50px; height: 50px; background: rgba(255, 0, 0, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
@@ -607,22 +855,64 @@
             </a>
           </div>
         `;
-      }
+        }
 
-      // 9. Scroll Indicator Logic
-      const scrollIndicators = document.querySelectorAll('.scroll-to-motion');
-      const motionGraphicsSection = document.getElementById('motion-graphics');
+        // 9. Scroll Indicator Logic
+        const scrollIndicators = document.querySelectorAll('.scroll-to-motion');
+        const motionGraphicsSection = document.getElementById('motion-graphics');
 
-      if (scrollIndicators.length > 0 && motionGraphicsSection) {
-        scrollIndicators.forEach(indicator => {
-          // Smooth scroll on click
-          indicator.addEventListener('click', () => {
-            motionGraphicsSection.scrollIntoView({ behavior: 'smooth' });
+        if (scrollIndicators.length > 0 && motionGraphicsSection) {
+          scrollIndicators.forEach(indicator => {
+            // Smooth scroll on click
+            indicator.addEventListener('click', () => {
+              motionGraphicsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+          });
+        }
+
+        // 10. Quick Nav Smooth Scroll & Active Highlight Handler
+        const quickNavButtons = document.querySelectorAll('.quick-nav-btn');
+        quickNavButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = btn.getAttribute('href').substring(1);
+            const targetElem = document.getElementById(targetId);
+            if (targetElem) {
+              quickNavButtons.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              targetElem.scrollIntoView({ behavior: 'smooth' });
+            }
           });
         });
-      }
-    });
-  </script>
+
+        // 11. Intersection Observer to highlight active category on scroll
+        const sections = document.querySelectorAll('section.section');
+        if ('IntersectionObserver' in window && sections.length > 0) {
+          const observerOptions = {
+            root: null,
+            rootMargin: '-35% 0px -50% 0px',
+            threshold: 0
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                quickNavButtons.forEach(btn => {
+                  if (btn.getAttribute('href') === `#${id}`) {
+                    btn.classList.add('active');
+                  } else {
+                    btn.classList.remove('active');
+                  }
+                });
+              }
+            });
+          }, observerOptions);
+
+          sections.forEach(section => observer.observe(section));
+        }
+      });
+    </script>
 
 </body>
 
