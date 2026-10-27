@@ -602,6 +602,385 @@
         transform: translateY(18px);
       }
     }
+    /* ── Header Top Layout & Actions ── */
+    .header-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .header-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.8rem, 0.9vw + 0.45rem, 0.9rem);
+      font-weight: 700;
+      color: #cbd5e1;
+      background: rgba(20, 27, 45, 0.85);
+      border: 1.5px solid rgba(79, 142, 247, 0.35);
+      padding: 10px 18px;
+      min-height: 44px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      line-height: 1;
+      box-sizing: border-box;
+    }
+
+    .action-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .action-btn:hover,
+    .action-btn:focus-visible {
+      color: #ffffff;
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .action-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .action-btn:hover svg,
+    .action-btn:focus-visible svg {
+      transform: scale(1.12);
+    }
+
+    /* Primary Blue: View Resume */
+    .action-btn-resume {
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      border-color: #60a5fa;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
+    }
+
+    .action-btn-resume:hover,
+    .action-btn-resume:focus-visible {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      border-color: #93c5fd;
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+
+    /* LinkedIn */
+    .action-btn-linkedin:hover,
+    .action-btn-linkedin:focus-visible {
+      background: rgba(10, 102, 194, 0.25);
+      border-color: #0a66c2;
+      box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);
+      color: #ffffff;
+    }
+
+    /* WhatsApp */
+    .action-btn-whatsapp {
+      border-color: rgba(37, 211, 102, 0.35);
+    }
+
+    .action-btn-whatsapp:hover,
+    .action-btn-whatsapp:focus-visible {
+      background: rgba(37, 211, 102, 0.2);
+      border-color: #25d366;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      color: #ffffff;
+    }
+
+    @media (max-width: 480px) {
+      .header-actions {
+        width: 100%;
+      }
+      .action-btn {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 125px;
+        padding: 10px 12px;
+      }
+      .action-btn-resume {
+        flex: 1 1 100%;
+      }
+    }
+
+    /* ── Resume Modal Viewer ── */
+    .resume-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 2.5vw, 24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .resume-modal-backdrop[hidden] {
+      display: none;
+    }
+
+    .resume-modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .resume-modal-card {
+      background: #141414;
+      border: 1.5px solid rgba(79, 142, 247, 0.35);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 960px;
+      height: min(90vh, 980px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 32px rgba(79, 142, 247, 0.2);
+      transform: scale(0.97);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-sizing: border-box;
+    }
+
+    .resume-modal-backdrop.is-open .resume-modal-card {
+      transform: scale(1);
+    }
+
+    .resume-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #181818;
+      flex-shrink: 0;
+      gap: 12px;
+    }
+
+    .resume-modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resume-title-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .resume-modal-title-group h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(1rem, 1.2vw + 0.5rem, 1.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .resume-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resume-download-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #93c5fd;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(79, 142, 247, 0.4);
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+
+    .resume-download-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .resume-download-btn:hover,
+    .resume-download-btn:focus-visible {
+      color: #ffffff;
+      background: #2563eb;
+      border-color: #60a5fa;
+      outline: none;
+    }
+
+    .resume-close-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-tertiary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .resume-close-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .resume-close-btn:hover,
+    .resume-close-btn:focus-visible {
+      color: #ffffff;
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.5);
+      outline: none;
+    }
+
+    .resume-modal-body {
+      flex: 1 1 auto;
+      position: relative;
+      background: #0a0a0a;
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resume-pdf-embed,
+    .resume-pdf-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      flex-grow: 1;
+      background: #111;
+    }
+
+    .resume-fallback-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+      height: 100%;
+      gap: 16px;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .resume-fallback-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .resume-modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      background: #181818;
+      flex-shrink: 0;
+      gap: 12px;
+    }
+
+    .resume-doc-info {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .resume-download-btn-prominent {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      border: 1px solid #60a5fa;
+      padding: 10px 20px;
+      min-height: 40px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      line-height: 1;
+    }
+
+    .resume-download-btn-prominent svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    .resume-download-btn-prominent:hover,
+    .resume-download-btn-prominent:focus-visible {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      border-color: #93c5fd;
+      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.6);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    @media (max-width: 640px) {
+      .resume-modal-backdrop {
+        padding: 8px;
+      }
+      .resume-modal-card {
+        height: 94vh;
+        max-height: 94vh;
+        border-radius: 10px;
+      }
+      .resume-modal-header {
+        padding: 10px 14px;
+      }
+      .resume-modal-footer {
+        padding: 10px 14px;
+      }
+      .resume-doc-info {
+        display: none;
+      }
+      .resume-download-btn-prominent {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 
@@ -609,8 +988,32 @@
 
   <!-- ── HEADER ── -->
   <header class="portfolio-header">
-    <h1>Murugavel<span>.</span></h1>
-    <p>video editor</p>
+    <div class="header-top">
+      <div class="header-brand">
+        <h1>Murugavel<span>.</span></h1>
+        <p>video editor</p>
+      </div>
+      <div class="header-actions" aria-label="Quick Actions">
+        <button type="button" class="action-btn action-btn-resume" id="view-resume-btn" aria-haspopup="dialog" aria-controls="resume-modal">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+          </svg>
+          <span>View Resume</span>
+        </button>
+        <a href="https://www.linkedin.com/in/murugavel-a-78b615358/" target="_blank" rel="noopener noreferrer" class="action-btn action-btn-linkedin">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://wa.me/919025960418" target="_blank" rel="noopener noreferrer" class="action-btn action-btn-whatsapp">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.12-.22-.19-.47-.32z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
     <div class="quick-nav-wrapper">
       <div class="quick-nav-header">
         <span class="quick-nav-hint">
@@ -912,8 +1315,158 @@
 
           sections.forEach(section => observer.observe(section));
         }
+
+        // ── 12. Resume Modal Viewer Logic ──
+        const resumeModal = document.getElementById('resume-modal');
+        const viewResumeBtn = document.getElementById('view-resume-btn');
+        const closeResumeBtn = document.getElementById('resume-close-btn');
+        let previousActiveElement = null;
+
+        function openResumeModal() {
+          if (!resumeModal) return;
+          previousActiveElement = document.activeElement;
+          resumeModal.removeAttribute('hidden');
+          void resumeModal.offsetWidth; // trigger reflow for smooth transition
+          resumeModal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+          if (closeResumeBtn) closeResumeBtn.focus();
+        }
+
+        function closeResumeModal() {
+          if (!resumeModal) return;
+          resumeModal.classList.remove('is-open');
+          document.body.style.overflow = '';
+          setTimeout(() => {
+            resumeModal.setAttribute('hidden', '');
+            if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+              previousActiveElement.focus();
+            }
+          }, 250);
+        }
+
+        if (viewResumeBtn) {
+          viewResumeBtn.addEventListener('click', openResumeModal);
+        }
+
+        if (closeResumeBtn) {
+          closeResumeBtn.addEventListener('click', closeResumeModal);
+        }
+
+        if (resumeModal) {
+          resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+              closeResumeModal();
+            }
+          });
+        }
+
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && resumeModal && !resumeModal.hasAttribute('hidden')) {
+            closeResumeModal();
+          }
+        });
+
+        // ── 12. Resume Modal Viewer Logic ──
+        const resumeModal = document.getElementById('resume-modal');
+        const viewResumeBtn = document.getElementById('view-resume-btn');
+        const closeResumeBtn = document.getElementById('resume-close-btn');
+        let previousActiveElement = null;
+
+        function openResumeModal() {
+          if (!resumeModal) return;
+          previousActiveElement = document.activeElement;
+          resumeModal.removeAttribute('hidden');
+          void resumeModal.offsetWidth; // trigger reflow for smooth transition
+          resumeModal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+          if (closeResumeBtn) closeResumeBtn.focus();
+        }
+
+        function closeResumeModal() {
+          if (!resumeModal) return;
+          resumeModal.classList.remove('is-open');
+          document.body.style.overflow = '';
+          setTimeout(() => {
+            resumeModal.setAttribute('hidden', '');
+            if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+              previousActiveElement.focus();
+            }
+          }, 250);
+        }
+
+        if (viewResumeBtn) {
+          viewResumeBtn.addEventListener('click', openResumeModal);
+        }
+
+        if (closeResumeBtn) {
+          closeResumeBtn.addEventListener('click', closeResumeModal);
+        }
+
+        if (resumeModal) {
+          resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+              closeResumeModal();
+            }
+          });
+        }
+
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && resumeModal && !resumeModal.hasAttribute('hidden')) {
+            closeResumeModal();
+          }
+        });
+        }
       });
     </script>
+
+  <!-- ── RESUME MODAL VIEWER ── -->
+  <div class="resume-modal-backdrop" id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title" hidden>
+    <div class="resume-modal-card">
+      <div class="resume-modal-header">
+        <div class="resume-modal-title-group">
+          <svg viewBox="0 0 24 24" class="resume-title-icon" aria-hidden="true">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+          </svg>
+          <h2 id="resume-modal-title">Resume</h2>
+        </div>
+        <div class="resume-modal-actions">
+          <a href="assets/resume.pdf" download="Murugavel-Resume.pdf" class="resume-download-btn" id="resume-download-header-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <span>Download</span>
+          </a>
+          <button type="button" class="resume-close-btn" id="resume-close-btn" aria-label="Close resume viewer">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="resume-modal-body">
+        <object data="assets/resume.pdf#toolbar=1&navpanes=0" type="application/pdf" class="resume-pdf-embed" id="resume-pdf-object">
+          <iframe src="assets/resume.pdf#toolbar=1&navpanes=0" title="Murugavel Resume" class="resume-pdf-iframe">
+            <div class="resume-fallback-content">
+              <p>Unable to display PDF directly in this browser.</p>
+              <div class="resume-fallback-actions">
+                <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="action-btn">Open in New Tab</a>
+                <a href="assets/resume.pdf" download="Murugavel-Resume.pdf" class="action-btn action-btn-resume">Download Resume</a>
+              </div>
+            </div>
+          </iframe>
+        </object>
+      </div>
+      <div class="resume-modal-footer">
+        <span class="resume-doc-info">Murugavel · Video Editor &amp; Motion Graphics</span>
+        <a href="assets/resume.pdf" download="Murugavel-Resume.pdf" class="resume-download-btn-prominent" id="resume-download-footer-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+          </svg>
+          <span>Download Resume</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
 </body>
 
